@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
    # config/routes.rb
 root 'foods#index'
+resources :foods, only: [:index, :new, :create]
+resources :users, only: [:index, :show, :new, :create]
+resources :recipe_foods, only: [:index, :new, :create]
+resources :recipes, only: [:index, :new, :create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
