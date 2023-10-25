@@ -1,5 +1,5 @@
 class FoodsController < ApplicationController
-  def index;
+  def index
     @foods = Food.all
   end
 
@@ -26,7 +26,7 @@ class FoodsController < ApplicationController
   end
 
   protected
-  
+
   def food_params
     params.require(:food).permit(:name, :measurement_unit, :price, :quantity)
   end
