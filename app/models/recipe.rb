@@ -2,8 +2,41 @@ class Recipe < ApplicationRecord
   belongs_to :user
   has_many :recipe_foods
 
-  validates :name, presence: true, length: { minimum: 2, maximum: 50 }, allow_blank: false
-  validates :measurement_unit, presence: true, allow_blank: false
-  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
-  validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :name, presence: true, length: { minimum: 1, maximum: 50 }, allow_blank: false
+  validates :preparation_time, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :cooking_time, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :description, presence: true, allow_blank: false
+  validates :public, inclusion: { in: [true, false] }
+
+  def preparation_time_hours
+    hours = preparation_time / 60
+    hours.to_i
+  end
+
+  def preparation_time_minutes
+    minutes = preparation_time % 60
+    minutes.to_i
+  end
+
+  def cooking_time_hours
+    hours = cooking_time / 60
+    hours.to_i
+  end
+
+  def cooking_time_minutes
+    minutes = cooking_time % 60
+    minutes.to_i
+  end
+
+  def total_time_hours
+    total = preparation_time + cooking_time
+    hours = total / 60
+    hours.to_i
+  end
+
+  def total_time_minutes
+    total = preparation_time + cooking_time
+    minutes = total % 60
+    minutes.to_i
+  end
 end

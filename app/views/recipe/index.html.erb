@@ -1,1 +1,49 @@
-<h2> Recipe </h2>
+<%= stylesheet_link_tag 'formstyle.css' %>
+<div class="container mt-3">
+<% if user_signed_in? %>
+      <div class="d-flex justify-content-center">
+        <div class="col-12 m-1">
+          <%= link_to 'Add Recipe', new_recipe_path, class: 'btn btn-primary mb-3 float-end' %>
+        </div>
+      </div>
+    <% end %>
+  <div class="card">
+    <div class="card-header">
+        <% if @recipes.present? %>
+        <div class="d-flex align-items-center justify-content-center">
+            <label class="align-self-center text text-primary">
+                Number of Recipe:
+                <%= @recipes.size %> 
+            </label>
+          </div>
+        <% else %>
+          <div class="d-flex align-items-center justify-content-center">
+            <label class="text text-danger">
+              No Recipe description found.
+            </label>
+          </div>
+        <% end %>
+    </div>
+</div>
+<% @recipes.each do |recipe| %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <article class="col-12 row">
+        <div class="col-4 name-link">
+          
+          <%= link_to recipe_path(recipe), class: "btn btn-link text-decoration-none mb-1" do %>
+            <h1><%= recipe.name %></h1>
+          <% end %>
+
+          <%= button_to "REMOVE", recipe_path(recipe), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+        </div>
+        <div class="col-8">
+          <p>
+            <%= recipe.description %>
+          </p>
+        </div>
+      </article>
+    </div>
+  </div>
+<% end %>
+</div>
