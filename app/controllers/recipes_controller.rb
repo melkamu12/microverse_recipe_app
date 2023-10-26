@@ -21,7 +21,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
     @recipe.preparation_time = calculate_minutes(params[:recipe][:preparation_time_hr],
-      params[:recipe][:preparation_time_min])
+                                                 params[:recipe][:preparation_time_min])
     @recipe.cooking_time = calculate_minutes(params[:recipe][:cooking_time_hr], params[:recipe][:cooking_time_min])
 
     if @recipe.save
@@ -36,7 +36,7 @@ class RecipesController < ApplicationController
   end
 
   private
-  
+
   def recipe_params
     params.require(:recipe).permit(:name, :description, :public)
   end
