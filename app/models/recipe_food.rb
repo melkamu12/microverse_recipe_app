@@ -1,10 +1,18 @@
 class RecipeFood < ApplicationRecord
-  belongs_to :user
-  has_many :recipe_foods
+  belongs_to :recipe
+  belongs_to :food
 
-  validates :name, presence: true, length: { minimum: 1, maximum: 50 }, allow_blank: false
-  validates :preparation_time, presence: true, numericality: { only_integer: true, greater_than: 0 }
-  validates :cooking_time, presence: true, numericality: { only_integer: true, greater_than: 0 }
-  validates :description, presence: true, allow_blank: false
-  validates :public, inclusion: { in: [true, false] }
+  validates :quantity, presence: true, numericality: { greater_than: 0 }
+
+  def total_price
+    food.price * quantity
+  end
+
+  def quantity_needed
+    [quantity - food.quantity, 0].max
+  end
+
+  def total_price_need
+    food.price * quantity_needed
+  end
 end
