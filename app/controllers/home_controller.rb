@@ -1,3 +1,5 @@
 class HomeController < ApplicationController
-  def index; end
+  def index
+    @foods = Food.all.order(id: :desc)
+  end
 end
