@@ -1,27 +1,34 @@
 <div class="container mt-5">
-  <div class="col-12 text-center">
-    <h1 class="text text-primary">Public Recipes</h1>
-  </div>
-  <% @recipes.includes(:user).each do |recipe| %>
-    <div class="card mb-5">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-4" style="display:flex;flex-direction:column;">
-            <%= link_to recipe_path(recipe), class: "text-decoration-none" do %>
-              <h3><%= recipe.name %></h3>
-              <span class="text-primary">By: <%= recipe.user.name %></span>
-            <% end %>
-          </div>
-          <div class="col-8">
-            <p>
-              Total food items: <%= recipe.recipe_foods.count %>
-            </p>
-            <p>
-              Total price: &#x20b9; <%= number_to_currency(recipe.recipe_foods.sum { |rf| rf.food.price * rf.quantity }, unit: '') %>
-            </p>
-          </div>
-        </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="col-12 text-center">
+        <h1 class="text text-primary">Public Recipes</h1>
       </div>
+      </div>
+    <div class="card-body mb-2">
+      <% @recipes.includes(:user).each_with_index do |recipe, index| %>
+        <div class="card-body mb-2">
+            <div class="row">
+              <div class="col-4" style="display:flex;flex-direction:column;">
+                <%= link_to recipe_path(recipe), class: "text-decoration-none" do %>
+                  <h3><%= recipe.name %></h3>
+                  <span class="text-primary">By: <%= recipe.user.name %></span>
+                <% end %>
+              </div>
+              <div class="col-8">
+                <p>
+                  Total food items: <%= recipe.recipe_foods.count %>
+                </p>
+                <p>
+                  Total price: $ <%= number_to_currency(recipe.recipe_foods.sum { |rf| rf.food.price * rf.quantity }, unit: '') %>
+                </p>
+              </div>
+            </div>
+          </div>
+          <% if index < @recipes.length - 1 %>
+            <hr class=" bg-dark border-3 my-4">
+          <%end%>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
