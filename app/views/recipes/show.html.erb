@@ -45,9 +45,9 @@
             <% end %>
           </div>
             <div class="col-12 p-3 mt-2">
-            <div class="d-flex justify-content-between">
-              <%= link_to "Generate shopping List", class: 'btn btn-primary' %>
-              <%= link_to "Add ingredient", class: 'btn btn-primary mr-2' %>
+              <div class="d-flex justify-content-between">
+              <%= link_to "Generate shopping List", generate_shopping_lists_path(recipe_id: @recipe.id), class: 'btn btn-primary' %>
+              <%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe.id), class: 'btn btn-primary mr-2' %>
             </div>
           </div>
         </div>
