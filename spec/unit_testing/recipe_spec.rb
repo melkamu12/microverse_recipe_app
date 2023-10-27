@@ -1,15 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Recipe, type: :model do
-  let(:user) { User.create( name: 'Test User') }
-  let(:recipe) { Recipe.new(
-    name: 'Test Recipe',
-    preparation_time: 30,
-    cooking_time: 60,
-    description: 'A test recipe',
-    public: true,
-    user: user
-  ) }
+  let(:user) { User.create(name: 'Test User') }
+  let(:recipe) do
+    Recipe.new(
+      name: 'Test Recipe',
+      preparation_time: 30,
+      cooking_time: 60,
+      description: 'A test recipe',
+      public: true,
+      user:
+    )
+  end
 
   it 'is valid with valid attributes' do
     expect(recipe).to be_valid
@@ -24,7 +26,7 @@ RSpec.describe Recipe, type: :model do
     recipe.name = 'a' * 51
     expect(recipe).to_not be_valid
   end
-  
+
   it 'is invalid without a preparation time' do
     recipe.preparation_time = nil
     expect(recipe).to_not be_valid
