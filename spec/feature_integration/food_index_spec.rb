@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Foods index page', type: :feature do
   before(:each) do
-    @user = User.create(id: 3, name: 'melkamu', email: 'melkamu12@gmail.com', password: '12345678', confirmed_at: Time.now)
+    @user = User.create(id: 3, name: 'melkamu', email: 'melkamu12@gmail.com', password: '12345678',
+                        confirmed_at: Time.now)
 
     sign_in @user
 
@@ -38,9 +39,9 @@ RSpec.describe 'Foods index page', type: :feature do
   end
 
   describe 'Add food button' do
-  it 'redirects to new food path when Add Food button is clicked' do
-    click_link('Add food')
-    expect(page).to have_current_path(new_food_path)
+    it 'redirects to new food path when Add Food button is clicked' do
+      click_link('Add food')
+      expect(page).to have_current_path(new_food_path)
+    end
   end
-end
 end
