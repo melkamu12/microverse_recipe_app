@@ -1,6 +1,6 @@
 class FoodsController < ApplicationController
   def index
-    @foods = Food.all
+    @foods = Food.where(user: current_user)
   end
 
   def new
@@ -20,9 +20,9 @@ class FoodsController < ApplicationController
 
   def destroy
     @food = Food.find(params[:id])
-    @food.destroy
+    redirect_to foods_path, notice: "Food #{@food.name} was deleted!" and return if @food.destroy
 
-    redirect_to foods_path, notice: 'You successfully deleted the food.'
+    redirect_to foods_path, alert: 'Something went wrong while trying to delete the Food'
   end
 
   protected

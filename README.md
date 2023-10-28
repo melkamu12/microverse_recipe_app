@@ -73,7 +73,7 @@ Install this project with:
   bundle install
 ```
 
-it will install the required gemfile for running the project
+this will install the required gemfile for running the project
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
