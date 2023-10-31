@@ -1,0 +1,10 @@
+.header-title {
+  background-color: #1c1c45;
+  color: white;
+}
+
+.name-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

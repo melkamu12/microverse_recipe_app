@@ -1,0 +1,60 @@
+<div class="container mt-3">
+<% if user_signed_in? %>
+      <div class="d-flex justify-content-center">
+        <div class="col-12 m-1">
+          <%= link_to 'Add food', new_food_path, class: 'btn btn-primary mb-3 float-end' %>
+        </div>
+      </div>
+    <% end %>
+  <div class="card">
+    <div class="card-header">
+        <% if @foods.present? %>
+        <div class="d-flex align-items-center justify-content-center">
+            <label class="align-self-center text text-primary">
+                Number of foods:
+                <%= @foods.size %> 
+            </label>
+          </div>
+        <% else %>
+          <div class="d-flex align-items-center justify-content-center">
+            <label class="text text-danger">
+              No foods found.
+            </label>
+          </div>
+        <% end %>
+    </div>
+    <div class="card-body ">
+      <table class="table table-bordered border-primary table-striped table-hover">
+        <thead class="table-info">
+          <tr>
+            <th>Food</th>
+            <th>Measurement unit</th>
+            <th>Unit price (in dollar)</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @foods.each do |food| %>
+            <tr>
+              <td><%= food.name %></td>
+              <td><%= food.measurement_unit %></td>
+              <td>$<%= food.price %></td>
+              <% if user_signed_in? %>
+              <td>
+                <%= button_to "Delete",
+                  food_path(food),
+                  method: :delete,
+                  data: { 
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  },
+                  class: 'btn btn-link' %>
+              </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

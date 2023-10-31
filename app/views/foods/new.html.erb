@@ -1,0 +1,38 @@
+<%= stylesheet_link_tag 'formstyle.css' %>
+
+<div class="container mt-3">
+  <div class="card ">
+    <div class="card-header header-title">
+      <div class="col-12 d-flex justify-content-center">
+        <h2>Add Food</h2>
+      </div>
+    </div>
+    <div class="card-body">
+      <%= form_for @food do |f| %>
+        <div class="mb-3">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'form-control', placeholder: 'Pizza'%>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :measurement_unit %>
+          <%= f.text_field :measurement_unit, placeholder: 'number', class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :price %>
+          <%= f.number_field :price, placeholder: '$34', class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :quantity %>
+          <%= f.number_field :quantity, placeholder: '4',  class: 'form-control' %>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center align-items-center">
+          <%= f.submit 'Create Food', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

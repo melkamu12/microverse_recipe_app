@@ -1,0 +1,57 @@
+<%= stylesheet_link_tag 'formstyle.css' %>
+<div class="container mt-5">
+    <div class="card ">
+    <div class="card-header header-title">
+      <div class="col-12 d-flex justify-content-center">
+     <h2>Add New Recipe</h2>
+      </div>
+    </div>
+    <div class="card-body">
+  <%= form_with(model: @recipe, url: recipes_path, method: :post, html: { class: "row g-3" }) do |form| %>
+    <div class="col-md-9">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, placeholder: 'Recipesname', class: "form-control", required: true %>
+    </div>
+
+    <div class="col-md-3 p-4 justify-content-center d-flex">
+      <div class="form-check form-switch">
+        <%= form.label :public, class: "form-check-label" %>
+        <%= form.check_box :public, class: "form-check-input" %>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <%= form.label :description, class: "form-label" %>
+      <%= form.text_area :description, placeholder: 'description', class: "form-control", required: true %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :preparation_time_hr, class: "form-label" %>
+      <%= form.number_field :preparation_time_hr, placeholder: '3', class: "form-control", min: 0 %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :preparation_time_min, class: "form-label" %>
+      <%= form.number_field :preparation_time_min, placeholder: '0-59', class: "form-control", min: 0, max: 59 %>
+    </div>
+
+    <div class="col-md-6">
+      <%= form.label :cooking_time_hr, class: "form-label" %>
+      <%= form.number_field :cooking_time_hr, placeholder: '5', class: "form-control", min: 0 %>
+    </div>
+    <div class="col-md-6">
+      <%= form.label :cooking_time_min, class: "form-label" %>
+      <%= form.number_field :cooking_time_min, placeholder: '0-59', class: "form-control", min: 0, max: 59 %>
+    </div>
+    <div class="mb-3 d-flex justify-content-center align-items-center">
+      <div class="col-md-2">
+        <%= form.submit "Create Recipe", class: "btn btn-primary" %>
+      </div>
+
+      <div class="col-md-2">
+        <%= link_to "Back to Recipes", recipes_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  <% end %>
+  </div>
+  </div>
+</div>
